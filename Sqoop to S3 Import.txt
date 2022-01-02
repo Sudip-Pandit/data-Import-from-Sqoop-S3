@@ -1,0 +1,30 @@
+Mysql ---
+=========
+
+create database test;
+use test;
+
+CREATE TABLE customermod4(custid INT,firstname VARCHAR(20),lastname VARCHAR(20),city varchar(50),age int,createdt date,transactamt int );
+
+insert into customermod4 values(1,'Arun','Kumar','chennai',33,'2015-09-20',100000);
+insert into customermod4 values(2,'srini','vasan','chennai',33,'2015-09-21',10000);
+insert into customermod4 values(3,'vasu','devan','banglore',39,'2015-09-22',90000);
+insert into customermod4 values(4,'mohamed','imran','hyderabad',33,'2015-09-23',1000);
+insert into customermod4 values(5,'arun','basker','chennai',23,'2015-09-24',200000);
+insert into customermod4 values(6,'arun','basker','chennai',23,'2015-09-24',200000);
+
+=========
+Edge Node
+=========
+
+
+sqoop import \
+-Dfs.s3a.access.key=<> \
+-Dfs.s3a.secret.key=<>  \
+-Dfs.s3a.endpoint=<>  \
+--connect jdbc:mysql://localhost/test \
+--username root \
+--password <> \
+--table customermod4 \
+-m 1 \
+--target-dir s3a://bucketName/<urname>_import;
